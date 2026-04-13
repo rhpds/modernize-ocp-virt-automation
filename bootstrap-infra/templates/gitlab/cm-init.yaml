@@ -191,7 +191,7 @@ data:
 
         - name: Replace template variables in templates/vms/template.yaml
           ansible.builtin.replace:
-            path: /tmp/{{ (index .Values.gitlab.repos 0).name }}/templates/vms/template.yaml
+            path: /tmp/{{ (index .Values.gitlab.repos 0).name }}/backstage/templates/vms/template.yaml
             regexp: '\{\{\s*{{ "{{" }} item.key {{ "}}" }}\s*\}\}'
             replace: '{{ "{{" }} item.value {{ "}}" }}'
           loop:

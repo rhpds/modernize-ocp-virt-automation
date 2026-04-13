@@ -170,17 +170,17 @@ data:
 
         - name: Set git repo url
           ansible.builtin.set_fact:
-            _git_repo_url: https://root:{{ "{{" }} root_token {{ "}}" }}@{{ "{{" }} gitlab_host {{ "}}" }}/rhdh/ai-app-dev-automation
+            _git_repo_url: https://root:{{ "{{" }} root_token {{ "}}" }}@{{ "{{" }} gitlab_host {{ "}}" }}/rhdh/{{ (index .Values.gitlab.repos 0).name }}
 
         - name: Remove older repo folder
-          shell: rm -rf /tmp/ai-app-dev-automation
+          shell: rm -rf /tmp/{{ (index .Values.gitlab.repos 0).name }}
 
-        - name: Clone ai-app-dev-automation
+        - name: Clone {{ (index .Values.gitlab.repos 0).name }}
           ansible.builtin.git:
             accept_hostkey: true
             force: true
             repo: '{{ "{{" }} _git_repo_url {{ "}}" }}'
-            dest: /tmp/ai-app-dev-automation
+            dest: /tmp/{{ (index .Values.gitlab.repos 0).name }}
             version: main
           environment:
             GIT_SSL_NO_VERIFY: "true"
@@ -191,7 +191,7 @@ data:
 
         - name: Replace template variables in templates/ai-app-dev/template.yaml
           ansible.builtin.replace:
-            path: /tmp/ai-app-dev-automation/templates/ai-app-dev/template.yaml
+            path: /tmp/{{ (index .Values.gitlab.repos 0).name }}/templates/ai-app-dev/template.yaml
             regexp: '\{\{\s*{{ "{{" }} item.key {{ "}}" }}\s*\}\}'
             replace: '{{ "{{" }} item.value {{ "}}" }}'
           loop:
@@ -202,27 +202,27 @@ data:
 
         - name: Git config email
           ansible.builtin.command:
-            chdir: /tmp/ai-app-dev-automation
+            chdir: /tmp/{{ (index .Values.gitlab.repos 0).name }}
             cmd: git config user.email "root@rhdemo.com"
 
         - name: Git config name
           ansible.builtin.command:
-            chdir: /tmp/ai-app-dev-automation
+            chdir: /tmp/{{ (index .Values.gitlab.repos 0).name }}
             cmd: git config user.name "Administrator"
 
         - name: Add new files to the repository
           ansible.builtin.command:
-            chdir: /tmp/ai-app-dev-automation
+            chdir: /tmp/{{ (index .Values.gitlab.repos 0).name }}
             cmd: git add .
           ignore_errors: true
 
         - name: Commit changes to the repository
           ansible.builtin.command:
-            chdir: /tmp/ai-app-dev-automation
+            chdir: /tmp/{{ (index .Values.gitlab.repos 0).name }}
             cmd: git commit -a -m 'Substitute template placeholders for cluster'
           ignore_errors: true
 
         - name: Push all changes back to the project repository
           ansible.builtin.command:
-            chdir: /tmp/ai-app-dev-automation
+            chdir: /tmp/{{ (index .Values.gitlab.repos 0).name }}
             cmd: git push {{ "{{" }} _git_repo_url {{ "}}" }}

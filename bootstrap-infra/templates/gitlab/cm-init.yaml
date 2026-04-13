@@ -189,16 +189,14 @@ data:
           delay: 10
           until: r_git_clone is not failed
 
-        - name: Replace template variables in templates/ai-app-dev/template.yaml
+        - name: Replace template variables in templates/vms/template.yaml
           ansible.builtin.replace:
-            path: /tmp/{{ (index .Values.gitlab.repos 0).name }}/templates/ai-app-dev/template.yaml
+            path: /tmp/{{ (index .Values.gitlab.repos 0).name }}/templates/vms/template.yaml
             regexp: '\{\{\s*{{ "{{" }} item.key {{ "}}" }}\s*\}\}'
             replace: '{{ "{{" }} item.value {{ "}}" }}'
           loop:
             - key: gitlab_host
               value: '{{ "{{" }} gitlab_host {{ "}}" }}'
-            - key: cluster_subdomain
-              value: '{{ "{{" }} cluster_subdomain {{ "}}" }}'
 
         - name: Git config email
           ansible.builtin.command:

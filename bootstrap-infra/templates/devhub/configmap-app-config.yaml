@@ -76,6 +76,6 @@ data:
         - allow: [Component, System, API, Resource, Location, Template, Domain]
       locations:
         - type: url
-          target: https://gitlab-{{ .Values.gitlab.namespace }}.{{ .Values.deployer.domain }}/rhdh/modernize-ocp-virt/-/blob/main/catalog-info.yaml
+          target: https://gitlab-{{ .Values.gitlab.namespace }}.{{ .Values.deployer.domain }}/rhdh/modernize-ocp-virt/-/blob/main/backstage/catalog-info.yaml
           rules:
             - allow: [Location, Template]

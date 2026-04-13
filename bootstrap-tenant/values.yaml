@@ -3,3 +3,17 @@
 # Declare variables to be passed into your templates.
 
 username: user1
+password: password
+namespaceSuffix: vms
+
+deployer:
+  domain: apps.cluster-guid.sandbox.opentlc.com
+
+jobAnsibleImage: quay.io/agnosticd/ee-multicloud:latest
+
+gitlab:
+  namespace: gitlab
+
+devhub:
+  namespace: rhdh
+  backendSecret: demo-backend-secret-key-change-me

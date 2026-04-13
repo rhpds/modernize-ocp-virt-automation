@@ -26,6 +26,9 @@ spec:
         helm:
           values: |
             username: '{{- "{{" }} user {{- " }}" }}'
+            deployer:
+              domain: {{ .Values.deployer.domain }}
+            jobAnsibleImage: {{ .Values.jobAnsibleImage }}
       destination:
         server: https://kubernetes.default.svc
       syncPolicy:

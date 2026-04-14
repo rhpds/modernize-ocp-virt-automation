@@ -28,6 +28,11 @@ spec:
             - containerPort: 8000
           securityContext:
             privileged: false
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 128Mi
           env:
             - name: LISTEN_ADDRESS
               value: ':8000'

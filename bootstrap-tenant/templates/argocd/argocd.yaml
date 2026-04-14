@@ -8,6 +8,11 @@ spec:
   sso:
     dex:
       openShiftOAuth: true
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          memory: 128Mi
     provider: dex
   rbac:
     policy: |
@@ -16,12 +21,6 @@ spec:
       g, {{ .Values.username }}, role:admin
     scopes: '[name,groups]'
   redis:
-    resources:
-      limits:
-        memory: 512Mi
-      requests:
-        memory: 128Mi
-  dex:
     resources:
       limits:
         memory: 512Mi

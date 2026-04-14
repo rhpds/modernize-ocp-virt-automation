@@ -29,6 +29,7 @@ spec:
             deployer:
               domain: {{ .Values.deployer.domain }}
             jobAnsibleImage: {{ .Values.jobAnsibleImage }}
+            tenantLifecycleNamespace: {{ .Values.tenantLifecycleNamespace }}
       destination:
         server: https://kubernetes.default.svc
       syncPolicy:

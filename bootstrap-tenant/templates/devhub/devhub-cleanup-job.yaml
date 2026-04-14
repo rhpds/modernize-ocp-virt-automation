@@ -1,8 +1,8 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: delete-catalog-entities
-  namespace: "{{ .Values.username }}-{{ .Values.namespaceSuffix }}"
+  name: devhub-cleanup-{{ .Values.username }}
+  namespace: {{ .Values.tenantLifecycleNamespace }}
   annotations:
     argocd.argoproj.io/hook: PreDelete
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
@@ -23,6 +23,6 @@ spec:
       volumes:
         - name: playbooks
           configMap:
-            name: cm-catalog-cleanup
+            name: cm-devhub-cleanup-{{ .Values.username }}
       restartPolicy: Never
   backoffLimit: 3

@@ -9,7 +9,7 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: gitlab-job
+      serviceAccountName: default
       containers:
         - name: ansible
           image: {{ .Values.jobAnsibleImage }}

@@ -10,6 +10,30 @@ deployer:
   domain: apps.cluster-guid.sandbox.opentlc.com
   apiUrl: https://api.cluster-guid.sandbox.opentlc.com:6443
 
+devhub:
+  namespace: rhdh
+  channel: fast-1.8
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  keycloakRealm: sso
+  oauth:
+    clientId: backstage
+    clientSecret: backstage-client-secret-demo
+  backendSecret: demo-backend-secret-key-change-me
+
+gitlab:
+  namespace: gitlab
+  image: quay.io/redhat-gpte/gitlab:17.4.1
+  postgresqlImage: quay.io/redhat-gpte/gitlab-postgresql:14
+  redisImage: redis:6.2.6
+  rootPassword: Dem0-G1tl4b!2026
+  repos:
+    - name: modernize-ocp-virt
+      sourceUrl: https://github.com/rhpds/modernize-ocp-virt-workspace.git
+
+jobCliImage: registry.redhat.io/openshift4/ose-cli:latest
+jobAnsibleImage: quay.io/agnosticd/ee-multicloud:latest
+
 # This is the user-scoped git repo, where per seat user resources are stored.
 # Set to empty to NOT create workspaces.
 # workspace: ""

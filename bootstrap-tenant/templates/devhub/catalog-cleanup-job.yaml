@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: delete-catalog-entities
+  namespace: "{{ .Values.username }}-{{ .Values.namespaceSuffix }}"
+  annotations:
+    argocd.argoproj.io/hook: PreDelete
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      serviceAccountName: gitlab-job
+      containers:
+        - name: ansible
+          image: {{ .Values.jobAnsibleImage }}
+          command:
+            - /bin/sh
+            - -c
+            - ansible-playbook /playbooks/delete-entities.yaml
+          volumeMounts:
+            - name: playbooks
+              mountPath: /playbooks
+      volumes:
+        - name: playbooks
+          configMap:
+            name: cm-catalog-cleanup
+      restartPolicy: Never
+  backoffLimit: 3

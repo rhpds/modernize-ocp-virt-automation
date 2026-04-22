@@ -30,6 +30,7 @@ gitlab:
   repos:
     - name: modernize-ocp-virt
       sourceUrl: https://github.com/rhpds/modernize-ocp-virt-workspace.git
+      revision: main
 
 tenantLifecycleNamespace: tenant-lifecycle
 

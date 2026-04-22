@@ -181,7 +181,7 @@ data:
             force: true
             repo: '{{ "{{" }} _git_repo_url {{ "}}" }}'
             dest: /tmp/{{ (index .Values.gitlab.repos 0).name }}
-            version: main
+            version: {{ (index .Values.gitlab.repos 0).revision }}
           environment:
             GIT_SSL_NO_VERIFY: "true"
           register: r_git_clone

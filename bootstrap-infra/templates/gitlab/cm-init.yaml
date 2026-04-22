@@ -208,6 +208,12 @@ data:
             chdir: /tmp/{{ (index .Values.gitlab.repos 0).name }}
             cmd: git config user.name "Administrator"
 
+        - name: Git checkout main
+          ansible.builtin.command:
+            chdir: /tmp/{{ (index .Values.gitlab.repos 0).name }}
+            cmd: git checkout main
+          ignore_errors: true
+
         - name: Add new files to the repository
           ansible.builtin.command:
             chdir: /tmp/{{ (index .Values.gitlab.repos 0).name }}

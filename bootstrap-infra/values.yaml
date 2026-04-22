@@ -39,9 +39,9 @@ jobAnsibleImage: quay.io/agnosticd/ee-multicloud:latest
 
 # This is the user-scoped git repo, where per seat user resources are stored.
 # Set to empty to NOT create workspaces.
-# workspace: ""
-workspace:
-  git:
-    url: https://github.com/rhpds/modernize-ocp-virt-gitops.git
-    revision: main
-    path: bootstrap-tenant
+workspace: ""
+# workspace:
+#   git:
+#     url: https://github.com/rhpds/modernize-ocp-virt-gitops.git
+#     revision: main
+#     path: bootstrap-tenant
